@@ -1,0 +1,64 @@
+Parameters:
+  myaddonLambdaName:
+    Description: Name of lambda.
+    Type: String
+    Default: myaddonLambda
+Resources:
+  myaddonLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+  myaddonLambdaRolePolicies:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: LambdaPolicy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Sid: Stmt12349896368829
+          Action:
+          - logs:CreateLogGroup
+          - logs:CreateLogStream
+          - logs:PutLogEvents
+          Effect: Allow
+          Resource: arn:aws:logs:*:*:*
+      Roles:
+        - Ref: myaddonLambdaRole
+  myaddonLambdaFn:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Ref myaddonLambdaName
+      Handler: index.handler
+      Role:
+        Fn::GetAtt:
+        - myaddonLambdaRole
+        - Arn
+      Code:
+        ZipFile:
+          Fn::Sub: |
+              import json
+              print('Loading function')
+              def lambda_handler(event, context):
+                  #print("Received event: " + json.dumps(event, indent=2))
+                  print("value1 = " + event['key1'])
+                  print("value2 = " + event['key2'])
+                  print("value3 = " + event['key3'])
+                  return event['key1']  # Echo back the first key value
+                  #raise Exception('Something went wrong')
+
+      Runtime: python3.7
+      Timeout: '60'
+
+Outputs:
+  myaddonPrimaryLambda:
+    Description: My Lambda Function
+    Value: !Ref myaddonLambdaFn

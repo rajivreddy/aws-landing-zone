@@ -1,0 +1,6 @@
+[
+  {
+    "ParameterKey": "myaddonLambdaName",
+    "ParameterValue": {{ lambda_name }}
+  }
+]

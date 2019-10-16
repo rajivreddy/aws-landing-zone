@@ -1,0 +1,31 @@
+---
+organizational_units:
+  - name: {{ core_ou }}
+    core_accounts:
+      - name: {{ core_account }}
+        core_resources:
+        - name: myaddon-Primary
+          template_file: templates/core_accounts/aws-landing-zone-myaddon-primary.template
+          parameter_file: parameters/core_accounts/aws-landing-zone-myaddon-primary.json
+          deploy_method: stack_set
+          ssm_parameters:
+            - name: /org/member/myaddon/lambdaname
+              value: $[output_myaddonPrimaryLambda]
+          regions:
+            - {{ region }}
+
+
+# Landing Zone Service Baseline Resources
+baseline_resources:
+   - name: myaddon-Spoke
+     baseline_products:
+      {%- for avm_product in avm_products %}
+      - {{ avm_product }}
+      {%- endfor %}
+     template_file: templates/aws_baseline/aws-landing-zone-myaddon-spoke.template
+     parameter_file: parameters/aws_baseline/aws-landing-zone-myaddon-spoke.json
+     deploy_method: stack_set
+     regions:
+     {%- for region in spoke_regions %}
+     - {{ region }}
+     {%- endfor %}

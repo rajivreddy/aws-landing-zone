@@ -1,0 +1,14 @@
+input_parameters:
+  - file_name: add_on_manifest.yaml
+    parameters:
+      core_ou: core
+      core_account: security
+      region: us-east-1
+      avm_products: ['AWS-Landing-Zone-Account-Vending-Machine']
+      spoke_regions: ['us-east-1']
+  - file_name: parameters/core_accounts/aws-landing-zone-myaddon-primary.json
+    parameters:
+      lambda_name: myaddon-lambda-master
+  - file_name: parameters/aws_baseline/aws-landing-zone-myaddon-spoke.json
+    parameters:
+      lambda_name: myaddon-lambda-slave

@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "myaddonLambdaSpokeName",
+    "ParameterValue": {{ lambda_name }}
+  },
+  {
+    "ParameterKey": "myaddonLambdaHubName",
+    "ParameterValue": "$[alfred_ssm_/org/myaddon/lambdaname]"
+  }
+]
