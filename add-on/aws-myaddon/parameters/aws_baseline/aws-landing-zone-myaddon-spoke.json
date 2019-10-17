@@ -5,6 +5,6 @@
   },
   {
     "ParameterKey": "myaddonLambdaHubName",
-    "ParameterValue": "$[alfred_ssm_/org/myaddon/lambdaname]"
+    "ParameterValue": "$[alfred_ssm_/org/member/myaddon/lambdaname]"
   }
 ]
