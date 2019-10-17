@@ -42,9 +42,9 @@ Resources:
     Properties:
       FunctionName: !Ref myaddonLambdaSpokeName
       Handler: index.handler
-      Environment:
-        Variables:
-          ParentLambdaFunction: !Ref myaddonLambdaHubName
+#      Environment:
+#        Variables:
+#          ParentLambdaFunction: !Ref myaddonLambdaHubName
       Role:
         Fn::GetAtt:
         - myaddonLambdaRole
