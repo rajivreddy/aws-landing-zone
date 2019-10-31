@@ -15,17 +15,17 @@ organizational_units:
             - {{ region }}
 
 
-# Landing Zone Service Baseline Resources
-baseline_resources:
-   - name: myaddon-Spoke
-     baseline_products:
-      {%- for avm_product in avm_products %}
-      - {{ avm_product }}
-      {%- endfor %}
-     template_file: templates/aws_baseline/aws-landing-zone-myaddon-spoke.template
-     parameter_file: parameters/aws_baseline/aws-landing-zone-myaddon-spoke.json
-     deploy_method: stack_set
-     regions:
-     {%- for region in spoke_regions %}
-     - {{ region }}
-     {%- endfor %}
+# # Landing Zone Service Baseline Resources
+# baseline_resources:
+#    - name: myaddon-Spoke
+#      baseline_products:
+#       {%- for avm_product in avm_products %}
+#       - {{ avm_product }}
+#       {%- endfor %}
+#      template_file: templates/aws_baseline/aws-landing-zone-myaddon-spoke.template
+#      parameter_file: parameters/aws_baseline/aws-landing-zone-myaddon-spoke.json
+#      deploy_method: stack_set
+#      regions:
+#      {%- for region in spoke_regions %}
+#      - {{ region }}
+#      {%- endfor %}
